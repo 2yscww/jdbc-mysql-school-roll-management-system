@@ -42,8 +42,7 @@ public class stuMenu extends JFrame {
         viewGradeMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 在这里添加查看课程成绩的逻辑
-                // 示例：showGradeInformation(username, connection);
+           
                 refreshStudentInfo(username, connection);
             }
         });
@@ -56,8 +55,8 @@ public class stuMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 new RewardPunishmentMenu(username, connection);
-                // 在这里添加查看奖惩信息的逻辑
-                // 示例：showRewardPunishmentInformation(username, connection);
+                
+                
             }
         });
         queryMenu.add(viewRewardPunishmentMenuItem);
@@ -70,7 +69,7 @@ public class stuMenu extends JFrame {
         setVisible(true);
     }
 
-    // 以下是略作修改的 refreshStudentInfo 方法，仅展示了部分信息
+
     private void refreshStudentInfo(String username, Connection connection) {
         // 执行查询语句
         String query = "SELECT course.kno, course.kname, grade.grade "

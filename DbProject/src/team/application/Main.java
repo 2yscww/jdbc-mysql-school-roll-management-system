@@ -103,9 +103,9 @@ class loginCheckFrame extends JFrame {
         try {
 
             // 获取数据库连接
-            String url = "jdbc:mysql://127.0.0.1:3306/school_roll_management_system?characterEncoding=utf8&useSSL=false";
+            String url = "jdbc:mysql://your_ip:3306/school_roll_management_system?characterEncoding=utf8&useSSL=false";
             String user = "root";
-            String passwd = "w86#qNwV";
+            String passwd = "root";
 
             // 创建连接
             connection = DriverManager.getConnection(url, user, passwd);

@@ -45,28 +45,16 @@ public class adminMenu extends JFrame {
         // 设定菜单栏
         setJMenuBar(menuBar);
 
-        /*
-         * 现在考虑把menubar 里面 填写 menu
-         * 然后再写子菜单去完成操作
-         * 事件监听
-         * 
-         * 完善子菜单的流程
-         * 
-         * 创建子菜单项
-         * 将子菜单添加进主菜单的名下
-         * 创建相应子菜单的面板
-         * 创建相应子菜单的响应事件
-         */
-        // FIXME 提示选项
+
 
         // <--------------------------------构建子菜单项------------------------------------->
 
         // 院系信息管理
         JMenuItem viewDepartment = new JMenuItem("院系信息管理");
-        // JMenuItem addDepartment = new JMenuItem("修改院系信息");
+
 
         // 专业管理
-        // JMenuItem viewMajorInfo = new JMenuItem("查看专业信息");
+
         JMenuItem modifyMajor = new JMenuItem("专业信息管理");
         JMenuItem modifyClass = new JMenuItem("班级信息管理");
 
@@ -76,8 +64,7 @@ public class adminMenu extends JFrame {
         // 学生管理
         JMenuItem viewStudentInfo = new JMenuItem("学生信息管理");
         JMenuItem modifyStudentScore = new JMenuItem("学生课程成绩管理");
-        // JMenuItem modifyStudentCourse = new JMenuItem("学生选课管理");
-        // JMenuItem modifyStudentClass = new JMenuItem("学生班级管理");
+
         JMenuItem modifyStudentAwardPunish = new JMenuItem("学生奖惩管理");
         JMenuItem viewStudentGlobal = new JMenuItem("学生概况查看");
 
@@ -92,7 +79,7 @@ public class adminMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 // 在这里处理查看院系的操作
-                // JOptionPane.showMessageDialog(adminMenu.this, "执行查看院系操作");
+
                 String showDepartmentInfo = "select * from depart";
                 try {
                     ResultSet departResultSet = statement.executeQuery(showDepartmentInfo);
@@ -110,7 +97,7 @@ public class adminMenu extends JFrame {
 
                     // 创建一个面板以容纳表格
                     JPanel viewDepartmentPanel = new JPanel(new BorderLayout());
-                    // viewDepartmentPanel.add(new JLabel("院系信息管理页面"), BorderLayout.NORTH);
+
                     viewDepartmentPanel.add(new JScrollPane(departmentTable), BorderLayout.CENTER);
 
                     // 创建按钮
@@ -204,7 +191,7 @@ public class adminMenu extends JFrame {
 
                             // 获取选中行的数据
                             String departmentCode = (String) tableModel.getValueAt(selectedRow, 0);
-                            // String departmentName = (String) tableModel.getValueAt(selectedRow, 1);
+
 
                             // 弹出确认对话框
                             int result = JOptionPane.showConfirmDialog(null, "确定删除选中的院系信息吗？", "确认删除",
@@ -368,7 +355,7 @@ public class adminMenu extends JFrame {
         modifyMajor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // new modifyDepartmentMenu(adminMenu.this,connection); modifyMajorMenu
+
                 new modifyMajorMenu(adminMenu.this, connection);
             }
 
@@ -390,7 +377,7 @@ public class adminMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 在这里处理查看学生的操作
-                // cardLayout.show(cardPanel, "viewStudentInfoPanel");
+         
                 new viewStudentInfoMenu(adminMenu.this, connection);
 
             }
@@ -432,7 +419,7 @@ public class adminMenu extends JFrame {
         viewCourseInfo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // cardLayout.show(cardPanel, "viewCourseInfoPanel");
+       
                 new modifyCourseMenu(adminMenu.this, connection);
 
             }
@@ -441,10 +428,10 @@ public class adminMenu extends JFrame {
         // <----------------------------------将子菜单项添加到父菜单------------------------------------>
         // 院系
         departmentManagement.add(viewDepartment);
-        // departmentManagement.add(addDepartment);
+   
 
         // 专业
-        // marjorManagement.add(viewMajorInfo);
+    
         marjorManagement.add(modifyMajor);
         marjorManagement.add(modifyClass);
 
@@ -454,8 +441,7 @@ public class adminMenu extends JFrame {
         // 学生
         stuManagement.add(viewStudentInfo);
         stuManagement.add(modifyStudentScore);
-        // stuManagement.add(modifyStudentCourse);
-        // stuManagement.add(modifyStudentClass);
+
         stuManagement.add(modifyStudentAwardPunish);
         stuManagement.add(viewStudentGlobal);
 
@@ -475,7 +461,7 @@ public class adminMenu extends JFrame {
         cardPanel.add(viewDepartmentPanel, "viewDepartmentPanel");
 
         JPanel addDepartmentPanel = new JPanel();
-        // addDepartmentPanel.add(new JLabel("修改院系信息页面"));
+ 
         cardPanel.add(addDepartmentPanel, "addDepartmentPanel");
 
         // 专业信息
@@ -484,18 +470,7 @@ public class adminMenu extends JFrame {
         // viewMajorInfoPanel.add(new JLabel("查看专业信息页面"));
         cardPanel.add(viewMajorInfoPanel, "viewMajorInfoPanel");
         // 修改专业信息
-        // JPanel modifyMajorPanel = new JPanel();
-        // cardPanel.add(modifyMajorPanel,"modifyMajor");
 
-        // 学生信息
-        //JPanel viewStudentInfoPanel = new JPanel();
-        // viewStudentInfoPanel.add(new JLabel("查看学生信息页面"));
-        // cardPanel.add(viewStudentInfoPanel, "viewStudentInfoPanel");
-
-        // 课程信息
-        // JPanel viewCourseInfoPanel = new JPanel();
-        // viewCourseInfoPanel.add(new JLabel("查看课程信息页面"));
-        // cardPanel.add(viewCourseInfoPanel, "viewCourseInfoPanel");
 
         // 将卡片面板添加到主窗口
         add(cardPanel);
@@ -506,30 +481,6 @@ public class adminMenu extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Connection connection = null;
-
-        // // 获取数据库连接
-        // String url = "jdbc:mysql://127.0.0.1:3306/school_roll_management_system?characterEncoding=utf8&useSSL=false";
-        // String user = "root";
-        // String passwd = "w86#qNwV";
-
-        // // 创建连接
-        // try {
-        //     // FIXME 这里在完成后需要被删除
-        //     connection = DriverManager.getConnection(url, user, passwd);
-        //     new adminMenu(connection);
-
-        // } catch (SQLException e) {
-
-        //     e.printStackTrace();
-        // }
-
-        // 还要再注释掉
-        // new adminMenu();
-
-        /*
-         * 最终还是要实现从Main那里调用
-         */
 
     }
 }

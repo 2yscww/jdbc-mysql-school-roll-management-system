@@ -12,18 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.sql.*;
 
-/*
- *  mysql> describe class;
- +---------+-------------+------+-----+---------+-------+
- | Field   | Type        | Null | Key | Default | Extra |
- +---------+-------------+------+-----+---------+-------+
- | cno     | char(8)     | NO   | PRI | NULL    |       |
- | cname   | varchar(40) | NO   |     | NULL    |       |
- | cnumber | smallint    | NO   |     | NULL    |       |
- | mno     | char(8)     | YES  | MUL | NULL    |       |
- +---------+-------------+------+-----+---------+-------+
- 4 rows in set (0.00 sec)
-*/
+
 
 public class modifyClassMenu extends JFrame {
     private DefaultTableModel tableModel;
@@ -120,8 +109,7 @@ public class modifyClassMenu extends JFrame {
 
                     try {
                         PreparedStatement addClassSqlex = connection.prepareStatement(addClassSql);
-                        // insertDepartSqlex.setString(1, departmentCode);
-                        // insertDepartSqlex.setString(2, departmentName);
+              
 
                         addClassSqlex.setString(1, ClassCode);
                         addClassSqlex.setString(2, ClassName);
@@ -141,7 +129,7 @@ public class modifyClassMenu extends JFrame {
                         }
                     } catch (SQLException e1) {
 
-                        //TODO 应当完善各个界面的错误处理
+           
                         if (e1.getErrorCode() == 1062) { // MySQL错误码，表示主键冲突
                             JOptionPane.showMessageDialog(null, "主键重复，无法插入重复的数据。", "错误", JOptionPane.ERROR_MESSAGE);
                         } else {

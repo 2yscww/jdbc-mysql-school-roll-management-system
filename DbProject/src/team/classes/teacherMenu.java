@@ -63,7 +63,7 @@ public class teacherMenu extends JFrame {
                     try {
                         int newGrade = Integer.parseInt(inputGrade);
         
-                        // 在这里执行更新数据库的逻辑
+
                         updateGradeInDatabase(username, connection, newGrade);
         
         
@@ -88,7 +88,7 @@ public class teacherMenu extends JFrame {
     private void updateGradeInDatabase(String username, Connection connection, int newGrade) throws SQLException {
         // 在这里执行更新数据库的逻辑
         String updateGradeSql = "UPDATE grade SET grade = ? WHERE sno = ? AND kno = ?";
-        //TODO 修改失败，找原因
+
 
         try (PreparedStatement updateGradeStatement = connection.prepareStatement(updateGradeSql)) {
             updateGradeStatement.setInt(1, newGrade);

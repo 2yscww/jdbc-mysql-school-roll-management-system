@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
-//modifyStudentAwardPunishMenu
+
 
 public class modifyStudentAwardPunishMenu extends JFrame {
     private DefaultTableModel tableModel;
@@ -19,60 +19,55 @@ public class modifyStudentAwardPunishMenu extends JFrame {
         setTitle("学生奖惩信息管理");
         setSize(800, 500);
 
-        // Adding window listener to capture window closing event
+        
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                parentFrame.setVisible(true); // Show the parent frame
+                parentFrame.setVisible(true); 
             }
         });
 
-        parentFrame.setVisible(false); // Hide the parent frame
+        parentFrame.setVisible(false); 
 
-        // Creating table model and table component
+        
         tableModel = new DefaultTableModel(new Object[][] {}, new Object[] { "奖惩编号", "学号", "奖惩等级", "奖惩方案", "下达日期" });
         awardPunishTable = new JTable(tableModel);
 
-        // Adding table to scroll pane
+       
         JScrollPane scrollPane = new JScrollPane(awardPunishTable);
 
-        // Adding scroll pane to the window
         add(scrollPane);
 
-        // Creating buttons
+    
         JButton addAwardPunishButton = new JButton("增加");
         JButton deleteAwardPunishButton = new JButton("删除");
         JButton modifyAwardPunishButton = new JButton("修改");
 
-        // Creating a panel to place buttons
+      
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addAwardPunishButton);
         buttonPanel.add(deleteAwardPunishButton);
         buttonPanel.add(modifyAwardPunishButton);
 
-        // Adding button panel to the bottom of the window
+   
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // <---------------------------Button
-        // Listeners---------------------------------->
-
-        // Add button
-        // Add button
+   
         addAwardPunishButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Create a panel to contain text fields
+       
                 JPanel addAwardPunishPanel = new JPanel();
                 addAwardPunishPanel.setLayout(new GridLayout(5, 2));
 
-                // Create text fields
+ 
                 JTextField apnoField = new JTextField();
                 JTextField asnoField = new JTextField();
                 JTextField aplevelField = new JTextField();
                 JTextField aprojectField = new JTextField();
                 JTextField adateField = new JTextField();
 
-                // Add text fields to the panel
+          
                 addAwardPunishPanel.add(new JLabel("奖惩编号: "));
                 addAwardPunishPanel.add(apnoField);
                 addAwardPunishPanel.add(new JLabel("学号: "));
@@ -84,42 +79,41 @@ public class modifyStudentAwardPunishMenu extends JFrame {
                 addAwardPunishPanel.add(new JLabel("下达日期: "));
                 addAwardPunishPanel.add(adateField);
 
-                // Show message dialog
+            
                 int result = JOptionPane.showConfirmDialog(null, addAwardPunishPanel, "请输入奖惩信息",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-                // If the user clicks OK
+  
                 if (result == JOptionPane.OK_OPTION) {
-                    // Get user input
+                    
                     String apno = apnoField.getText();
                     String asno = asnoField.getText();
                     String aplevel = aplevelField.getText();
                     String aproject = aprojectField.getText();
                     String adate = adateField.getText();
 
-                    // Check if input is empty
+               
                     if (apno.isEmpty() || asno.isEmpty() || aplevel.isEmpty() || aproject.isEmpty()
                             || adate.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "输入框都不能为空");
-                        return; // Do not execute database insertion
+                        return; 
                     }
 
-                    // SQL statement for adding award/punish
+               
                     String addAwardPunishSql = "INSERT INTO award_punish(apno, asno, aplevel, aproject, adate) VALUES (?, ?, ?, ?, ?)";
 
                     try {
-                        // Prepare the SQL statement
+                        
                         PreparedStatement addAwardPunishStmt = connection.prepareStatement(addAwardPunishSql);
 
-                        // Set parameters
+                     
                         addAwardPunishStmt.setString(1, apno);
                         addAwardPunishStmt.setString(2, asno);
                         addAwardPunishStmt.setString(3, aplevel);
                         addAwardPunishStmt.setString(4, aproject);
-                        addAwardPunishStmt.setDate(5, Date.valueOf(adate)); // Assuming adate is a string in the format
-                                                                            // 'YYYY-MM-DD'
+                        addAwardPunishStmt.setDate(5, Date.valueOf(adate));                                                                    // 'YYYY-MM-DD'
 
-                        // Execute the update//
+                     
                         int rowsAffected = addAwardPunishStmt.executeUpdate();
 
                         if (rowsAffected > 0) {
@@ -129,7 +123,7 @@ public class modifyStudentAwardPunishMenu extends JFrame {
                             JOptionPane.showMessageDialog(null, "插入数据到数据库失败");
                         }
                     } catch (SQLException e1) {
-                        // Handle SQL exception
+                      
                         e1.printStackTrace();
                     }
                 } else {
@@ -138,7 +132,7 @@ public class modifyStudentAwardPunishMenu extends JFrame {
             }
         });
 
-        // Delete button
+
         deleteAwardPunishButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -184,7 +178,7 @@ public class modifyStudentAwardPunishMenu extends JFrame {
             }
         });
 
-        // Modify button
+
         modifyAwardPunishButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -282,16 +276,16 @@ public class modifyStudentAwardPunishMenu extends JFrame {
 
         // <--------------------------------------------------------------------->
 
-        // Display award/punish information
+   
         String viewAwardPunishSql = "SELECT * FROM award_punish";
 
         try (Statement statement = connection.createStatement()) {
             ResultSet viewAwardPunishResult = statement.executeQuery(viewAwardPunishSql);
 
-            // Clear table model
+    
             tableModel.setRowCount(0);
 
-            // Iterate through query results and add data to table model
+   
             while (viewAwardPunishResult.next()) {
                 String apno = viewAwardPunishResult.getString("apno");
                 String asno = viewAwardPunishResult.getString("asno");
@@ -299,29 +293,29 @@ public class modifyStudentAwardPunishMenu extends JFrame {
                 String aproject = viewAwardPunishResult.getString("aproject");
                 Date adate = viewAwardPunishResult.getDate("adate");
 
-                // Add data to table model
+        
                 tableModel.addRow(new Object[] { apno, asno, aplevel, aproject, adate });
             }
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Release window resources
-        setLocationRelativeTo(null); // Display the window in the center of the screen
-        setVisible(true); // Show the current window
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+        setLocationRelativeTo(null); 
+        setVisible(true); 
     }
 
     private void refreshViewAwardPunishTable(Connection connection) {
-        // Refresh award/punish information
+      
         String viewAwardPunishSql = "SELECT * FROM award_punish";
 
         try (Statement statement = connection.createStatement()) {
             ResultSet viewAwardPunishResultSet = statement.executeQuery(viewAwardPunishSql);
 
-            // Clear table model
+           
             tableModel.setRowCount(0);
 
-            // Iterate through the query results and add data to the table model
+        
             while (viewAwardPunishResultSet.next()) {
                 String apno = viewAwardPunishResultSet.getString("apno");
                 String asno = viewAwardPunishResultSet.getString("asno");
@@ -329,7 +323,7 @@ public class modifyStudentAwardPunishMenu extends JFrame {
                 String aproject = viewAwardPunishResultSet.getString("aproject");
                 Date adate = viewAwardPunishResultSet.getDate("adate");
 
-                // Add data to table model
+          
                 tableModel.addRow(new Object[] { apno, asno, aplevel, aproject, adate });
             }
         } catch (SQLException e) {

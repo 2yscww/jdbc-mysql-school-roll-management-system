@@ -61,8 +61,6 @@ public class RewardPunishmentMenu extends JFrame {
     }
 
     public static void main(String[] args) {
-        // 示例用法
-        // 可以在这里传入学生的用户名和数据库连接对象
-        // new RewardPunishmentMenu("学生用户名", connection);
+       
     }
 }
